@@ -1,0 +1,24 @@
+{% extends "registration/base.html" %}
+{% load static %}{% block body_block %}
+  <div class="container">
+    <div class="jumbotron">
+        <h1>Register Here</h1>
+        <h3>Just fill out the form.</h3><form enctype="multipart/form-data" method="POST">
+		    {% if user.is_authenticated %}
+        <h2>Hello {{ user.username }}</h2>
+          {% csrf_token %}
+          {{ mobile_data.as_p }}
+		  {{ upload_form.as_p }}
+          <input type="submit" name="" value="Register">
+
+		   {% if img_obj %}  
+        <h3>Succesfully uploaded</h3>  
+        <img src="{{ img_obj.image.url}}" alt="connect" style="max-height:300px">  
+    {% endif %}
+	    {% else %}
+        <h2>Register or Login if you'd like to</h2>
+    {% endif %}
+        </form>
+    </div>
+  </div>
+{% endblock %}

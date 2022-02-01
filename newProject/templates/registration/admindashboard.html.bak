@@ -1,0 +1,37 @@
+{% extends 'registration/base.html' %}
+{% block body_block %}
+<html>
+<head>
+<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+<script type='text/javascript'>
+   $(document).ready(function(){
+    $.ajax({
+             url : "http://127.0.0.1:8000/api/user_Details?userflag=C",
+             dataType: "json",
+             success : function (data) {
+					 $.each(data, function(i, item) {
+					$("#my_friends tbody").prepend('<tr><td>'+item.username+'</td><td>'+item.mobileno+'</td><td>'+item.email+'</td><td><a href=?id="'+item.id+'"</a>Enable</td></tr>')
+					});
+                    }
+                 });
+
+});
+</script>
+</head>
+<h1>Requested Login form Company Registered to Enable </h1>
+    <table class="table table-striped table-sm" id="my_friends">
+        <thead>
+            <tr>
+                <th>User Name</th>
+                <th>Mobile No</th>
+                <th>Email</th>
+				<th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+
+</html>
+{% endblock %}
